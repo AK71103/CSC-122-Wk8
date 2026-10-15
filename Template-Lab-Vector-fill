@@ -1,0 +1,27 @@
+// Templating lab
+// Alexander w kazantzis
+// 10-15-26
+
+#include <iostream>
+#include <array>
+#include <vector>
+#include <cassert>
+#include <algorithm>
+template <typename T>
+void vec_fill(std::vector<T>& vec, size_t size, const T& value){// fills Vector with elements
+    vec.resize(size);
+    
+    std::fill(vec.begin(), vec.end(), value); 
+} 
+
+int main(){
+    int Elem = 1;
+    std::vector<int> ElemVec;
+    vec_fill(ElemVec, 10, Elem); 
+
+    for (size_t i=0; i <= ElemVec.size(); ++i){
+        std::cout << ElemVec[i] + i << " "; //should print Elem,Elem+1,Elem+2,etc
+    }
+return 0;
+//Write assert tests for each of these functions using at least three different template instantiations for each.
+}
