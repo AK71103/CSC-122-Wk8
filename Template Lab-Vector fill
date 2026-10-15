@@ -50,7 +50,8 @@ int main(){
     for (size_t i=0; i < ElemVec.size(); ++i){
         std::cout << ElemVec[i] + i << " "; //should print Elem,Elem+1,Elem+2,etc
     }
-    //Write assert tests for each of these functions, using three different template instantiations for each.
+    std::cout << '\n';
+    //Write assert tests for each of these functions, using three different template instantiations for each, and then run them.
     Tst_vec_fill();
 return 0;
 
