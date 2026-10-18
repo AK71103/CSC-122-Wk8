@@ -1,0 +1,43 @@
+#include <iostream>
+#include <array>
+#include <vector>
+#include <cassert>
+#include <algorithm>
+#include <cstddef>
+#include <string>
+template <typename T>
+void vec_fill(std::vector<T>& vec, size_t size, const T& value){// fills Vector with elements
+    vec.resize(size);
+    
+    std::fill(vec.begin(), vec.end(), value); 
+} 
+oid vec_order(T& a, T& b, T& c){ //A holds the largest value, B holds the 2nd largest, C holds 3rd largest.
+    if(a<b) std::swap(a,b);
+    if(a<c) std::swap(a,c);
+    if(b<c) std::swap(b,c);
+}
+
+void Tst_vec_order(){ 
+    //test 1 (int)
+    int a=6,b=3,c=5;
+    vec_order(a,b,c);
+    assert(a==6 && b==5 && c==3);
+    //test 2 (already ordered)
+    a=10;
+    b=8;
+    c=6;
+    vec_order(a,b,c);
+    assert(a==10 && b==8 && c==6);
+    //test 3 (negative)
+    a=-5;
+    b=-2;
+    c=-9;
+    vec_order(a,b,c);
+    assert(a==-2 && b==-5 && c==-9);
+    std::cout << "All tests cleared, vec_order works!\n";
+}
+
+int main(){
+   Tst_vec_order();
+}
+}
