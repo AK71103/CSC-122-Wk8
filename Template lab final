@@ -1,0 +1,111 @@
+// Templating lab
+// Alexander w kazantzis
+// 10-15-26
+
+#include <iostream>
+#include <array>
+#include <vector>
+#include <cassert>
+#include <algorithm>
+#include <cstddef>
+#include <string>
+#include <iterator>
+template <typename T>
+void vec_fill(std::vector<T>& vec, size_t size, const T& value){// fills Vector with elements
+    vec.resize(size);
+    
+    std::fill(vec.begin(), vec.end(), value); 
+} 
+
+void Tst_vec_fill(){
+    //test 1 int
+    std::vector<int> intVec;
+    vec_fill(intVec,3,5);
+    assert(intVec.size() ==3);
+    assert(intVec[0]==5);
+    assert(intVec[1]==5);
+    assert(intVec[2]==5);
+    //test 2 double
+    std::vector<double> DoubVec;
+    vec_fill(DoubVec, 2, 3.14);
+    assert(DoubVec.size()==2);
+    assert(DoubVec[0]==3.14);
+    assert(DoubVec[1]==3.14);
+    //test 3 string
+    std::vector<std::string> StrVec;
+    vec_fill(StrVec,4,std::string("Clear"));
+    assert(StrVec.size() ==4);
+    assert(StrVec[0]=="Clear");
+    assert(StrVec[1]=="Clear");
+    assert(StrVec[2]=="Clear");
+    assert(StrVec[3]=="Clear");
+    //Test confirm
+    std::cout << "All tests cleared, vec_fill works!\n";
+}
+template <typename T>
+void vec_order(T& a, T& b, T& c){ //A holds the largest value, B holds the 2nd largest, C holds 3rd largest.
+    if(a<b) std::swap(a,b);
+    if(a<c) std::swap(a,c);
+    if(b<c) std::swap(b,c);
+}
+
+void Tst_vec_order(){ 
+    //test 1 (int)
+    int a=6,b=3,c=5;
+    vec_order(a,b,c);
+    assert(a==6 && b==5 && c==3);
+    //test 2 (already ordered)
+    a=10;
+    b=8;
+    c=6;
+    vec_order(a,b,c);
+    assert(a==10 && b==8 && c==6);
+    //test 3 (negative)
+    a=-5;
+    b=-2;
+    c=-9;
+    vec_order(a,b,c);
+    assert(a==-2 && b==-5 && c==-9);
+    std::cout << "All tests cleared, vec_order works!\n";
+}
+template <typename Container>
+int vec_search(const Container& container, int value){ //Uses iterators to search an arbitrary container of integers.
+    auto it = std::find(container.begin(), container.end(), value);
+
+    if (it == container.end()) {
+        return -1;
+    }
+
+    return static_cast<int>(
+        std::distance(container.begin(), it)
+    );
+}
+void Tst_vec_search(){
+    // Test 1: Find a value in a vector
+    std::vector<int> v = {10, 20, 30, 40};
+    assert(vec_search(v, 30) == 2);
+
+    // Test 2: Value not found
+    assert(vec_search(v, 99) == -1);
+
+    // Test 3: Find the first duplicate
+    std::vector<int> v2 = {5, 8, 5, 9};
+    assert(vec_search(v2, 5) == 0);
+    std::cout << "All tests cleared, vec_search works!\n";
+}
+int main(){
+    int Elem = 1;
+    std::vector<int> ElemVec;
+    vec_fill(ElemVec, 10, Elem); 
+
+    for (size_t i=0; i < ElemVec.size(); ++i){
+        std::cout << ElemVec[i] + i << " "; //should print Elem,Elem+1,Elem+2,etc
+    }
+    std::cout << '\n';
+    //assert 3 tests for each
+    Tst_vec_fill();
+    Tst_vec_order();
+    Tst_vec_search();
+return 0;
+
+}
