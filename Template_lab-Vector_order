@@ -16,7 +16,7 @@ oid vec_order(T& a, T& b, T& c){ //A holds the largest value, B holds the 2nd la
     if(a<c) std::swap(a,c);
     if(b<c) std::swap(b,c);
 }
-
+template <typename T>
 void Tst_vec_order(){ 
     //test 1 (int)
     int a=6,b=3,c=5;
